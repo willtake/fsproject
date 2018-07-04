@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+  <head>
+  	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Layout</title>
+    <link rel="stylesheet"
+      th:href="@{/css/bootstrap.min.css}"
+      href="../../css/bootstrap.min.css"/>
+  </head>
+  <body>
+    <div class="container">
+      <div class="navbar">
+        <div class="navbar-inner">
+          <a class="brand"
+              href="http://localhost">
+              Tron38X
+          </a>
+          <ul class="nav">
+            <li>
+              <a th:href="@{/}" href="./bizinfo/list.html">
+                	종목정보
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <h1 layout:fragment="header">Layout</h1>
+      <div layout:fragment="content">
+        Fake content
+      </div>
+    </div>
+  </body>
+</html>

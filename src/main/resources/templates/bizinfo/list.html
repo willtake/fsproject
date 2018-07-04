@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+	layout:decorator="layout">
+	<head>
+	  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	  <title>Tron38X : TripleX Partners</title>
+	</head>
+	<body>
+	  <h2 layout:fragment="header">장외주식 종목정보 </h2>
+	  <div layout:fragment="content" class="container">
+	    <table class="table table-bordered table-striped">
+	      <thead>
+	        <tr>
+	          <td>No</td>
+	          <td>종목코드</td>
+	          <td>회사명</td>
+	          <td>조회수</td>
+	          <td>5일 이동평균</td>
+	          <td>14일 이동평균</td>
+	          <td>생성일자</td>
+	          <td>바로가기</td>
+	        </tr>
+	      </thead>
+	      <tbody>
+	        <tr th:if="${cms.empty}">
+	          <td colspan="8">
+	            	수집된 정보가 없습니다.
+	          </td>
+	        </tr>
+	        <tr th:each="outSideStockInfoModel : ${cms}">
+	          <td th:text="${outSideStockInfoModel.id}">1</td>
+	          <td th:text="${outSideStockInfoModel.companyCode}">1</td>			
+	          <td>
+                  <a href="${outSideStockInfoModel.boardUrl}"
+		          th:href="@{${outSideStockInfoModel.boardUrl}}"
+		          th:text="${outSideStockInfoModel.companyName}">q</a>
+	          </td>
+	          <td th:text="${outSideStockInfoModel.todayReplyCnt}">1</td>
+	          <td th:text="${outSideStockInfoModel.fiveDaysAverageCnt}">1</td>
+	          <td th:text="${outSideStockInfoModel.twoWeeksAverageCnt}">1</td>
+	          <td th:text="${#calendars.format(outSideStockInfoModel.saveDate,'yyyy-MM-dd')}">2015-05-17</td>
+	          <td>
+                  <a href="${outSideStockInfoModel.boardUrl}" target="sub"
+		          th:href="@{${outSideStockInfoModel.boardUrl}}"
+		          th:text="바로가기">바로가기</a>
+	          </td>
+	        </tr>
+	      </tbody>
+	    </table>
+		<!-- Pagination Bar -->
+		<div class="table-pagination">
+			<div class="pagination pagination-centered">
+				<ul>
+					<li th:class="${currentIndex == 1} ? 'disabled' : ''">
+					    <a th:if='${currentIndex == 1}'>First</a>
+					    <a th:if='${currentIndex != 1}'
+					       th:href="@{''(pageNumber=1)}">First</a>
+					</li>
+					<li th:class="${currentIndex != 1} ? '' : 'disabled'">
+					    <a th:if='${currentIndex == 1}'>«</a>
+					    <a th:if='${currentIndex != 1}'
+					       th:href="@{''(pageNumber=${currentIndex - 1})}"
+					       title='Go to previous page'>«</a>
+					</li>
+
+					<li th:each="item : ${#numbers.sequence(beginIndex, endIndex)}"
+					    th:class="${item == currentIndex} ? 'active' : ''">
+					    <a th:if='${item == currentIndex}' th:text='${item}'>1</a>
+
+					    <a th:if='${item != currentIndex}' th:href="@{''(pageNumber=${item})}">
+					        <span th:text='${item}'>1</span>
+					    </a>
+					</li>
+					
+					<li th:class="${currentIndex != totalPage} ? '0' : 'disabled'">
+					    <a th:if='${currentIndex == totalPage}'>»</a>
+					    <a th:if='${currentIndex != totalPage}'
+					       th:href="@{''(pageNumber=${currentIndex + 1})}" 
+					       title='Go to next page'>»</a>
+					</li>
+					<li th:class="${currentIndex == totalPage} ? 'disabled' : ''">
+					    <a th:if='${currentIndex == totalPage}'>Last</a>
+					    <a th:if='${currentIndex != totalPage}'
+					       th:href="@{''(pageNumber=${totalPage})}">Last</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<!-- Pagination Bar -->
+    </div>
+  </body>
+</html>

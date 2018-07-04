@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+	<title></title>
+	<style type="text/css">
+		font { line-height:16px; font-size:9pt; font-family:"Times New Roman","굴림", Gulim, Arial,Helvetica,sans-serif, "Apple Gothic"; } 
+		td { line-height:16px; font-size:9pt; font-family:"Times New Roman","굴림", Gulim, Arial,Helvetica,sans-serif, "Apple Gothic"; } 
+	</style>
+</head>
+<body> 
+	<table>
+		<tr>
+			<td height="30" align="center" bgcolor="Black">
+			<font size="3" color="#FFFFFF"><b>FSProject Notice!!!</b></font></td>
+		</tr>
+		<tr>
+			<td align="left" > 
+				<table align="left" border="0" width="100%" cellpadding="0" cellspacing="1" align="center" bgcolor="#C4C4C4">
+					<tr height="20" valign="middle">
+						<td align="center" bgcolor="#C4FFC4">No</td>
+						<td align="center" bgcolor="#C4FFC4">종목코드</td>
+						<td align="center" bgcolor="#C4FFC4">회사명</td>
+						<td align="center" bgcolor="#C4FFC4">업종</td>
+						<td align="center" bgcolor="#C4FFC4">댓글수</td>
+						<td align="center" bgcolor="#C4FFC4">5일이동평균</td>
+						<td align="center" bgcolor="#C4FFC4">14일이동평균</td>
+					</tr>
+					#set( $i = 1 )
+					#set( $font_color = "black" )
+					#foreach( $row in $list )
+						<tr height="20" valign="middle" align="center">
+							<td align="center">$i</td>
+							<td align="center">$row.companyCode</td>
+							<td align="center"><a href="$row.boardUrl" target="sub">$row.companyName</a></td>
+							<td align="center">$row.marketType</td>
+							<td align="center">$row.todayReplyCnt</td>
+							<td align="center">$row.fiveDaysAverageCnt</td>
+							<td align="center">$row.twoWeeksAverageCnt</td>
+						</tr>
+						#set( $i = $i + 1 )
+					#end
+				</table>
+			</td>
+		</tr>
+	</table>
+	<br/>
+</body>
+</html>
